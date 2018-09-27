@@ -1,10 +1,15 @@
+<% if @server_admin -%>
+ServerAdmin <%= @server_admin %>
+<% end -%>
 <% if @server_alias.kind_of? Array -%>
 ServerAlias <% @server_aliases = [] %><% @server_alias.sort.each {| value | @server_aliases.insert(-1, "#{value}") } %><%= @server_aliases.join(" ") %>
 <% elsif @server_alias.kind_of? String -%>
 ServerAlias <%= @server_alias %>
 <% end -%>
-LogLevel warn
-PageLogFormat
+LogLevel <%= @log_level %>
+<% if @page_log_format -%>
+PageLogFormat <%= @page_log_format %>
+<% end -%>
 MaxLogSize 0
 <% unless @listen.empty? -%>
 <%   [@listen].flatten.each do |l| -%>
@@ -17,6 +22,15 @@ DefaultAuthType Basic
 <%= '#' if @web_interface.nil? -%>WebInterface <%= (@web_interface ? 'Yes' : 'No') %>
 <Location />
   Order allow,deny
+<% if @server_alias.kind_of? Array -%>
+<%   unless @location_root.empty? -%>
+<%     [@location_root.empty?].flatten.each do |l| -%>
+<%=      "Allow #{l}" %>
+<%     end -%>
+<%   end -%>
+<% elsif @server_alias.kind_of? String -%>
+  Allow <%= @location_root %>
+<% end -%>
 </Location>
 <Location /admin>
   Order allow,deny
