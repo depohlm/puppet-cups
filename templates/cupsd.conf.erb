@@ -22,13 +22,13 @@ DefaultAuthType Basic
 <%= '#' if @web_interface.nil? -%>WebInterface <%= (@web_interface ? 'Yes' : 'No') %>
 <Location />
   Order allow,deny
-<% if @server_alias.kind_of? Array -%>
-<%   unless @location_root.empty? -%>
-<%     [@location_root].flatten.each do |2| -%>
-<%=      "  Allow #{2}" %>
-<%     end -%>
+<% if @location_root.kind_of? Array -%>
+<% unless @location_root.empty? -%>
+<%   [@location_root].flatten.each do |l| -%>
+<%=    "Listen #{l}" %>
 <%   end -%>
-<% elsif @server_alias.kind_of? String -%>
+<% end -%>
+<% elsif @location_root.kind_of? String -%>
   Allow <%= @location_root %>
 <% end -%>
 </Location>
