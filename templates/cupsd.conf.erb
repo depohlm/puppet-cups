@@ -24,8 +24,8 @@ DefaultAuthType Basic
   Order allow,deny
 <% if @server_alias.kind_of? Array -%>
 <%   unless @location_root.empty? -%>
-<%     [@location_root.empty?].flatten.each do |l| -%>
-<%=      "Allow #{l}" %>
+<%     [@location_root].flatten.each do |2| -%>
+<%=      "  Allow #{2}" %>
 <%     end -%>
 <%   end -%>
 <% elsif @server_alias.kind_of? String -%>
