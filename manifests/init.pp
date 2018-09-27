@@ -51,6 +51,7 @@ class cups (
   Optional[String]                                                                             $page_log_format        = undef,
   Optional[String]                                                                             $default_queue          = undef,
   Variant[String, Array[String]]                                                               $listen                 = ['localhost:631', '/var/run/cups/cups.sock'],
+  Optional[Variant[String, Array[String]]]                                                     $location_root          = undef,
   String                                                                                       $package_ensure         = 'present',
   Boolean                                                                                      $package_manage         = true,
   Variant[String, Array[String]]                                                               $package_names          = $::cups::params::package_names,
