@@ -25,7 +25,7 @@ DefaultAuthType Basic
 <% if @location_root.kind_of? Array -%>
 <% unless @location_root.empty? -%>
 <%   [@location_root].flatten.each do |l| -%>
-<%=    "Listen #{l}" %>
+<%=    "  Allow #{l}" %>
 <%   end -%>
 <% end -%>
 <% elsif @location_root.kind_of? String -%>
